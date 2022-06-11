@@ -10,7 +10,8 @@ class Weather
               :visibility,
               :conditions,
               :icon,
-              :daily_weather
+              :daily_weather,
+              :hourly_weather
 
   def initialize(data)
     @id = nil
@@ -24,8 +25,11 @@ class Weather
     @visibility = data[:current][:visibility]
     @conditions = data[:current][:weather][0][:description]
     @icon = data[:current][:weather][0][:icon]
-    @daily_weather = data[:daily].map do |day|
+    @daily_weather = data[:daily].first(5).map do |day|
       DailyWeather.new(day)
+    end
+    @hourly_weather = data[:hourly].first(8).map do |hour|
+      HourlyWeather.new(hour)
     end
   end
 end

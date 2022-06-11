@@ -30,7 +30,8 @@ class WeatherSerializer
               conditions: weather.conditions,
               icon: weather.icon
             },
-            daily_weather: weather.daily_weather
+            daily_weather: weather.daily_weather,
+            hourly_weather: weather.hourly_weather
           }
         }
     }
