@@ -19,7 +19,7 @@ class Weather
     @sunrise = Time.at(data[:current][:sunrise])
     @sunset = Time.at(data[:current][:sunset])
     @temperature = data[:current][:temp]
-    @feels_like = data[:current][:feels_like]
+    @feels_like = data[:current][:feels_like].to_f
     @humidity = data[:current][:humidity]
     @uvi = data[:current][:uvi]
     @visibility = data[:current][:visibility]
