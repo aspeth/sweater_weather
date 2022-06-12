@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Image do
-  it 'exists and has attributes' do
+  it 'exists and has attributes', :vcr do
     response = BackgroundService.get_image("denver,co")
 
     image = Image.new(response[:results].sample)
