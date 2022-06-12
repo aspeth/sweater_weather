@@ -67,4 +67,15 @@ RSpec.describe 'user registration' do
     
     expect(response.status).to eq(400)
   end
+  
+  it "sends an error mesage if missing field", :vcr do
+    data = {
+              "password": "password",
+              "password_confirmation": "password"
+            }
+  
+    post "/api/v1/users", params: data, as: :json
+    
+    expect(response.status).to eq(400)
+  end
 end
