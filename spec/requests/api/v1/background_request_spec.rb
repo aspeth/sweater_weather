@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'background image API' do
-  it 'sends a background image for a city' do
+  it 'sends a background image for a city', :vcr do
     get '/api/v1/backgrounds?location=denver,co'
 
     expect(response).to be_successful

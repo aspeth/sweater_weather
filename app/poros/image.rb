@@ -8,7 +8,7 @@ class Image
 
   def initialize(data)
     @id = nil
-    @location = data[:user][:location]
+    @location = data[:user][:location].to_s
     @image_url = data[:urls][:raw]
     @source = "unsplash.com"
     @user = data[:user][:username]
