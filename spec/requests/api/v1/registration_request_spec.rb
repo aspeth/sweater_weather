@@ -55,4 +55,16 @@ RSpec.describe 'user registration' do
     
     expect(response.status).to eq(400)
   end
+  
+  it "sends an error mesage if passwords don't match", :vcr do
+    data = {
+              "email": "whatever@example.com",
+              "password": "password",
+              "password_confirmation": "differentwords"
+            }
+  
+    post "/api/v1/users", params: data, as: :json
+    
+    expect(response.status).to eq(400)
+  end
 end
