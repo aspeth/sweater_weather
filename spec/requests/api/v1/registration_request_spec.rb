@@ -9,7 +9,7 @@ RSpec.describe 'user registration' do
             }
 
     post "/api/v1/users", params: data, as: :json
-    
+
     expect(response).to be_successful
     expect(response.status).to eq(201)
     
@@ -70,12 +70,37 @@ RSpec.describe 'user registration' do
   
   it "sends an error mesage if missing field", :vcr do
     data = {
+              "email": "",
               "password": "password",
               "password_confirmation": "password"
             }
   
     post "/api/v1/users", params: data, as: :json
     
+    expect(response.status).to eq(400)
+  end
+  
+  it "sends an error mesage if missing field", :vcr do
+    data = {
+              "email": "words@place.com",
+              "password": '',
+              "password_confirmation": "password"
+            }
+  
+    post "/api/v1/users", params: data, as: :json
+
+    expect(response.status).to eq(400)
+  end
+  
+  it "sends an error mesage if missing field", :vcr do
+    data = {
+              "email": "words@place.com",
+              "password": 'password',
+              "password_confirmation": ""
+            }
+  
+    post "/api/v1/users", params: data, as: :json
+
     expect(response.status).to eq(400)
   end
 end
