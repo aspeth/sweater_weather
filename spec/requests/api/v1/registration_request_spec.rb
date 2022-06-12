@@ -11,6 +11,7 @@ RSpec.describe 'user registration' do
     post "/api/v1/users", params: data, as: :json
     
     expect(response).to be_successful
+    expect(response.status).to eq(201)
     
     user = JSON.parse(response.body, symbolize_names: true)
     
