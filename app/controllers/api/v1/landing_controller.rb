@@ -8,6 +8,7 @@ class Api::V1::LandingController < ApplicationController
 
   def backgrounds
     image_info = BackgroundFacade.get_image(params[:location])
-    image_poro = Image.new(image_info[:results].sample)
+    require 'pry'; binding.pry
+    render json: BackgroundSerializer.image(image_info)
   end
 end
