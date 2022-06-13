@@ -35,4 +35,17 @@ RSpec.describe 'user login' do
     expect(user_info).to have_key(:api_key)
     expect(user_info[:api_key]).to be_a(String)
   end
+
+  it "returns error if credentials are incorrect" do
+    User.create!(email: "whatever@example.com", password: "password", password_confirmation: "password", api_key: "very_secure_key")
+
+    data = {
+      "email": "whatever@example.com",
+      "password": "notmypassword"
+    }
+    
+    post '/api/v1/sessions', params: data, as: :json
+
+    expect(response.status).to eq(401)
+  end
 end
