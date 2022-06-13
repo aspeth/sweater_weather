@@ -6,6 +6,6 @@ class Api::V1::BooksController < ApplicationController
     weather = WeatherFacade.get_weather(lat_long[:lat], lat_long[:lng])
     weather_poro = Weather.new(weather)
 
-    render json: LocationSerializer.new(books, weather_poro)
+    render json: LocationSerializer.weather_and_books(weather_poro, books, params[:location])
   end
 end

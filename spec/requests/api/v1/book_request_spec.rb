@@ -5,11 +5,13 @@ RSpec.describe 'books search' do
     get "/api/v1/book-search?location=denver,co&quantity=5"
 
     expect(response).to be_successful
-    expect(response).to have_key(:data)
-    expect(response[:data]).to be_a(Hash)
-    expect(response.keys.count).to eq(1)
+    books_and_weather = JSON.parse(response.body, symbolize_names: true)
 
-    data = response[:data]
+    expect(books_and_weather).to have_key(:data)
+    expect(books_and_weather[:data]).to be_a(Hash)
+    expect(books_and_weather.keys.count).to eq(1)
+
+    data = books_and_weather[:data]
 
     expect(data).to have_key(:id)
     expect(data[:id]).to be nil
@@ -17,7 +19,11 @@ RSpec.describe 'books search' do
     expect(data[:type]).to eq("books")
     expect(data).to have_key(:attributes)
     expect(data[:attributes]).to be_a(Hash)
-    expect(data.keys.count).to eq(3)
+    expect(data).to have_key(:total_books_found)
+    expect(data[:total_books_found]).to be_an(Integer)
+    expect(data).to have_key(:books)
+    expect(data[:books]).to be_an(Array)
+    expect(data.keys.count).to eq(5)
 
     attributes = data[:attributes]
 
@@ -25,12 +31,8 @@ RSpec.describe 'books search' do
     expect(attributes[:destination]).to eq("denver,co")
     expect(attributes).to have_key(:forecast)
     expect(attributes[:forecast]).to be_a(Hash)
-    expect(attributes).to have_key(:total_books_found)
-    expect(attributes[:total_books_found]).to be_an(Integer)
-    expect(attributes).to have_key(:books)
-    expect(attributes[:books]).to be_an(Array)
 
-    books = attributes[:books]
+    books = data[:books]
 
     expect(books.count).to eq(5)
     books.each do |book|
