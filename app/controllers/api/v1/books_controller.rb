@@ -2,6 +2,8 @@ class Api::V1::BooksController < ApplicationController
   def results
     if params[:location] == "" || params[:quantity] == ""
       render json: { message: "all parameters must be provided" }, status: 400
+    elsif params[:quantity].to_i < 0
+      render json: { message: "quantity must be a positive number" }, status: 400
     else
       books = BooksFacade.get_books(params[:location], params[:quantity])
       lat_long = MapquestFacade.get_lat_long(params[:location])

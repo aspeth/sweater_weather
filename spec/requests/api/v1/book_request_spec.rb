@@ -69,4 +69,10 @@ RSpec.describe 'books search' do
 
     expect(response.status).to eq(400)
   end
+
+  it "returns an error if given negative number for quantity", :vcr do
+    get '/api/v1/book-search?location=denver,co&quantity=-2'
+
+    expect(response.status).to eq(400)
+  end
 end
