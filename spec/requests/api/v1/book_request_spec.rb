@@ -63,4 +63,10 @@ RSpec.describe 'books search' do
 
     expect(response.status).to eq(400)
   end
+
+  it "returns an error if given bad location", :vcr do
+    get '/api/v1/book-search?location=notalocation&quantity=5'
+
+    expect(response.status).to eq(400)
+  end
 end
