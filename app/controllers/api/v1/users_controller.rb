@@ -15,10 +15,10 @@ class Api::V1::UsersController < ApplicationController
   def login
     user = User.find_by(email: params[:email])
 
-    if user.authenticate(params[:password])
-      render json: UsersSerializer.return(user), status: 200
-    else
+    if user.nil? || !user.authenticate(params[:password])
       render json: { message: "incorrect credentials" }, status: 401
+    else
+      render json: UsersSerializer.return(user), status: 200
     end
   end
 end
