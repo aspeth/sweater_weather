@@ -75,4 +75,14 @@ RSpec.describe 'books search' do
 
     expect(response.status).to eq(400)
   end
+
+  it "returns books if given float for quantity", :vcr do
+    get '/api/v1/book-search?location=denver,co&quantity=2.5'
+
+    expect(response.status).to eq(200)
+
+    books = JSON.parse(response.body, symbolize_names: true)
+
+    expect(books[:data][:books].count).to eq(2)
+  end
 end
