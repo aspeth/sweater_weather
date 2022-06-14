@@ -8,11 +8,14 @@ class Api::V1::RoadTripController < ApplicationController
       weather = WeatherFacade.get_weather(lat_long[:lat], lat_long[:lng])
       weather_poro = Weather.new(weather, 48)
       travel_info = MapquestFacade.get_directions(params[:origin], params[:destination])[:route]
-      formatted_travel_time = travel_info[:formattedTime]
-      arrival_time = Time.now + travel_info[:legs][0][:time]
-      arrival_weather = weather_poro.hourly_weather[formatted_travel_time[0..1].to_i]
-
-      render json: RoadTripSerializer.trip_and_weather(params[:origin], params[:destination],formatted_travel_time, arrival_weather)
+      if travel_info.has_key?(:formattedTime)
+        formatted_travel_time = travel_info[:formattedTime]
+        arrival_time = Time.now + travel_info[:legs][0][:time]
+        arrival_weather = weather_poro.hourly_weather[formatted_travel_time[0..1].to_i]
+        render json: RoadTripSerializer.trip_and_weather(params[:origin], params[:destination], formatted_travel_time, arrival_weather)
+      else
+        render json: RoadTripSerializer.trip_and_weather(params[:origin], params[:destination], "impossible", arrival_weather), status: 400
+      end
     end
   end
 end

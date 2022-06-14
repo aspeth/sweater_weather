@@ -71,4 +71,19 @@ RSpec.describe 'roadtrip API' do
     road_trip = JSON.parse(response.body, symbolize_names: true)
     expect(road_trip[:data][:attributes][:travel_time][0..1]).to eq("40")
   end
+
+  it "returns an error if no route possible", :vcr do
+    User.create!(email: "email@mail.com", password: "yes", password_confirmation: "yes", api_key: "jgn983hy48thw9begh98h4539h4")
+    data = {
+      "origin": "New York, NY",
+      "destination": "London, UK",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+    post '/api/v1/road_trip', params: data, as: :json
+
+    expect(response.status).to eq(400)
+
+    road_trip = JSON.parse(response.body, symbolize_names: true)
+    
+  end
 end
