@@ -13,7 +13,7 @@ class Weather
               :daily_weather,
               :hourly_weather
 
-  def initialize(data)
+  def initialize(data, hours)
     @id = nil
     @datetime = Time.at(data[:current][:dt])
     @sunrise = Time.at(data[:current][:sunrise])
@@ -28,7 +28,7 @@ class Weather
     @daily_weather = data[:daily].first(5).map do |day|
       DailyWeather.new(day)
     end
-    @hourly_weather = data[:hourly].first(8).map do |hour|
+    @hourly_weather = data[:hourly].first(hours).map do |hour|
       HourlyWeather.new(hour)
     end
   end

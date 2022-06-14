@@ -5,7 +5,7 @@ RSpec.describe HourlyWeather do
     lat_long = MapquestFacade.get_lat_long("denver,co")
     weather = WeatherFacade.get_weather(lat_long[:lat], lat_long[:lng])
 
-    weather_poro = Weather.new(weather)
+    weather_poro = Weather.new(weather, 8)
 
     hourly_weather = weather_poro.hourly_weather.first
 
