@@ -1,11 +1,11 @@
 # Sweater Weather
 ![image](https://user-images.githubusercontent.com/92954894/173646734-82c4e6dd-dbe0-44f9-8e68-649f1450864d.png)
 
-  ## Table of Contents
+## Table of Contents
 
-  ### [Getting Started :runner:](#getting-started)
-  ### [Calling Endpoints :telephone_receiver:](#calling-endpoints)
-  ### [Built With :hammer_and_wrench:](#built-with)
+### [Getting Started :runner:](#getting-started)
+### [Calling Endpoints :telephone_receiver:](#calling-endpoints)
+### [Built With :hammer_and_wrench:](#built-with)
 
 # GETTING STARTED
   
@@ -40,4 +40,4 @@ VCR |
 Webmock |
 Shoulda Matchers |
 SimpleCov |
-Figaro | <br><br>
+Figaro
