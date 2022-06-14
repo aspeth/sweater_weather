@@ -84,6 +84,7 @@ RSpec.describe 'roadtrip API' do
     expect(response.status).to eq(400)
 
     road_trip = JSON.parse(response.body, symbolize_names: true)
-    
+    expect(road_trip[:data][:attributes][:travel_time]).to eq("impossible")
+    expect(road_trip[:data][:attributes][:weather_at_eta]).to eq({})
   end
 end
