@@ -7,7 +7,7 @@
 ### [Calling Endpoints :telephone_receiver:](#calling-endpoints)
 ### [Built With :hammer_and_wrench:](#built-with)
 
-# GETTING STARTED
+# Getting Started
   
 * Clone this repo
 * `bundle install`
