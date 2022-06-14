@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Weather do
-  xit 'exists and has attributes', :vcr do
+  it 'exists and has attributes', :vcr do
     lat_long = MapquestFacade.get_lat_long("denver,co")
     weather = WeatherFacade.get_weather(lat_long[:lat], lat_long[:lng])
 
-    weather_poro = Weather.new(weather)
+    weather_poro = Weather.new(weather, 8)
 
     expect(weather_poro).to be_an_instance_of(Weather)
     expect(weather_poro.id).to be nil
