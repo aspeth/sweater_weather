@@ -44,4 +44,31 @@ RSpec.describe 'roadtrip API' do
     expect(weather[:conditions]).to be_a(String)
     expect(weather.keys.count).to eq(2)
   end
+
+  it "returns an error if no API key provided", :vcr do
+    User.create!(email: "email@mail.com", password: "yes", password_confirmation: "yes", api_key: "jgn983hy48thw9begh98h4539h4")
+    data = {
+      "origin": "Denver,CO",
+      "destination": "Pueblo,CO",
+      "api_key": ""
+    }
+    post '/api/v1/road_trip', params: data, as: :json
+
+    expect(response.status).to eq(401)
+  end
+
+  it "can handle a trip from NYC to LA", :vcr do
+    User.create!(email: "email@mail.com", password: "yes", password_confirmation: "yes", api_key: "jgn983hy48thw9begh98h4539h4")
+    data = {
+      "origin": "New York, NY",
+      "destination": "Los Angeles, CA",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+    post '/api/v1/road_trip', params: data, as: :json
+
+    expect(response.status).to eq(200)
+
+    road_trip = JSON.parse(response.body, symbolize_names: true)
+    expect(road_trip[:data][:attributes][:travel_time][0..1]).to eq("40")
+  end
 end
