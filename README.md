@@ -23,6 +23,9 @@
   * unsplash_api_key: your_key
   
   ## Available Endpoints - Postman Collection
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e300ab67bc182a9573c0?action=collection%2Fimport)
+
+-- Or follow the steps below --
 * [Click this link](https://www.getpostman.com/collections/e300ab67bc182a9573c0)
 * Copy the URL
 * Open Postman, select "Import" from top left of page, then "Link" from the top line
