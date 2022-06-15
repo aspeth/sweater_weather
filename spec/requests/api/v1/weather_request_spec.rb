@@ -103,7 +103,7 @@ RSpec.describe "weather API" do
       expect(hour[:conditions]).to be_a(String)
       expect(hour).to have_key(:icon)
       expect(hour[:icon]).to be_a(String)
-      expect(hour.keys.count).to eq(4)
+      expect(hour.keys.count).to eq(5)
     end
   end
 end
