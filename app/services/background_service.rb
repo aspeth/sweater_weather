@@ -1,7 +1,6 @@
-class BackgroundService
+class BackgroundService < BaseService
   def self.get_image(location)
-    conn = Faraday.new("https://api.unsplash.com/")
-    response = conn.get("search/photos?query=#{location}&client_id=#{ENV["unsplash_api_key"]}")
-    JSON.parse(response.body, symbolize_names: true)
+    response = conn("https://api.unsplash.com/").get("search/photos?query=#{location}&client_id=#{ENV["unsplash_api_key"]}")
+    get_json(response)
   end
 end
