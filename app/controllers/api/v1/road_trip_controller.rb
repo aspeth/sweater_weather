@@ -14,7 +14,6 @@ class Api::V1::RoadTripController < ApplicationController
         weather_poro.hourly_weather.find_all { |hour| hour.date.day == arrival_time.day }
         arrival_weather = weather_poro.hourly_weather.find { |hour| hour.date.day == arrival_time.day && hour.time[0..1] == arrival_time.hour.to_s }
         render json: RoadTripSerializer.trip_and_weather(params[:origin], params[:destination], formatted_travel_time, arrival_weather)
-        #pull this logic into facade helper method, in facade unit tests around this logic, passing in specific weather poros
       else
         render json: RoadTripSerializer.trip_and_weather(params[:origin], params[:destination], "impossible", arrival_weather), status: 400
       end

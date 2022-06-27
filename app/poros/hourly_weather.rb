@@ -8,7 +8,7 @@ class HourlyWeather
   def initialize(data)
     @date = Time.at(data[:dt])
     @time = Time.at(data[:dt]).strftime("%H:%M:%S")
-    @temperature = data[:temp].to_f
+    @temperature = data[:temp]
     @conditions = data[:weather][0][:description]
     @icon = data[:weather][0][:icon]
   end

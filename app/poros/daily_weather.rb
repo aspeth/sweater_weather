@@ -11,7 +11,7 @@ class DailyWeather
     @date = Time.at(data[:dt]).strftime("%Y-%m-%d")
     @sunrise = Time.at(data[:sunrise])
     @sunset = Time.at(data[:sunset])
-    @max_temp = data[:temp][:max].to_f
+    @max_temp = data[:temp][:max]
     @min_temp = data[:temp][:min]
     @conditions = data[:weather][0][:description]
     @icon = data[:weather][0][:icon]

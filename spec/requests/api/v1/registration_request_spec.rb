@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'user registration' do
-  it 'accepts user info and returns api key' do
+  it 'accepts user info and returns api key', :vcr do
     data = {
               "email": "whatever@example.com",
               "password": "password",
@@ -36,7 +36,7 @@ RSpec.describe 'user registration' do
     expect(user_info[:api_key]).to be_a(String)
   end
   
-  it "sends an error mesage if email is already taken" do
+  it "sends an error mesage if email is already taken", :vcr do
     data = {
               "email": "whatever@example.com",
               "password": "password",
@@ -56,7 +56,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if passwords don't match" do
+  it "sends an error mesage if passwords don't match", :vcr do
     data = {
               "email": "whatever@example.com",
               "password": "password",
@@ -68,7 +68,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if missing field" do
+  it "sends an error mesage if missing field", :vcr do
     data = {
               "email": "",
               "password": "password",
@@ -80,7 +80,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if missing field" do
+  it "sends an error mesage if missing field", :vcr do
     data = {
               "email": "words@place.com",
               "password": '',
@@ -92,7 +92,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if missing field" do
+  it "sends an error mesage if missing field", :vcr do
     data = {
               "email": "words@place.com",
               "password": 'password',
