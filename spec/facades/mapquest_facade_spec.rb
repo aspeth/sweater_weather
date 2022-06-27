@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'mapquest facade' do
-  it 'returns latitude and longitude', :vcr do
+  it 'returns latitude and longitude' do
     lat_long = MapquestFacade.get_lat_long("denver,co")
 
     expect(lat_long).to be_a(Hash)

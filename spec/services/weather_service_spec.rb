@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'WeatherService' do
-  it 'returns forecast information', :vcr do
+  it 'returns forecast information' do
     lat_long = MapquestService.get_lat_long("denver,co")
     response = WeatherService.get_weather(lat_long[:lat], lat_long[:lng])
 
