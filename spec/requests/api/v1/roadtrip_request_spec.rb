@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'roadtrip API' do
-  it 'returns location and weather info', :vcr do
+  it 'returns location and weather info' do
     User.create!(email: "email@mail.com", password: "yes", password_confirmation: "yes", api_key: "jgn983hy48thw9begh98h4539h4")
     data = {
       "origin": "Denver,CO",
@@ -36,7 +36,7 @@ RSpec.describe 'roadtrip API' do
     expect(attributes).to have_key(:weather_at_eta)
     expect(attributes[:weather_at_eta]).to be_a(Hash)
     expect(attributes.keys.count).to eq(4)
-    
+
     weather = attributes[:weather_at_eta]
     expect(weather).to have_key(:temperature)
     expect(weather[:temperature]).to be_a(Float)
