@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'user registration' do
-  it 'accepts user info and returns api key', :vcr do
+  it 'accepts user info and returns api key' do
     data = {
               "email": "whatever@example.com",
               "password": "password",
@@ -36,7 +36,7 @@ RSpec.describe 'user registration' do
     expect(user_info[:api_key]).to be_a(String)
   end
   
-  it "sends an error mesage if email is already taken", :vcr do
+  it "sends an error mesage if email is already taken" do
     data = {
               "email": "whatever@example.com",
               "password": "password",
@@ -56,7 +56,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if passwords don't match", :vcr do
+  it "sends an error mesage if passwords don't match" do
     data = {
               "email": "whatever@example.com",
               "password": "password",
@@ -68,7 +68,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if missing field", :vcr do
+  it "sends an error mesage if missing field" do
     data = {
               "email": "",
               "password": "password",
@@ -80,7 +80,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if missing field", :vcr do
+  it "sends an error mesage if missing field" do
     data = {
               "email": "words@place.com",
               "password": '',
@@ -92,7 +92,7 @@ RSpec.describe 'user registration' do
     expect(response.status).to eq(400)
   end
   
-  it "sends an error mesage if missing field", :vcr do
+  it "sends an error mesage if missing field" do
     data = {
               "email": "words@place.com",
               "password": 'password',
