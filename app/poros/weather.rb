@@ -18,7 +18,7 @@ class Weather
     @datetime = Time.at(data[:current][:dt])
     @sunrise = Time.at(data[:current][:sunrise])
     @sunset = Time.at(data[:current][:sunset])
-    @temperature = data[:current][:temp].to_f
+    @temperature = data[:current][:temp]
     @feels_like = data[:current][:feels_like].to_f
     @humidity = data[:current][:humidity]
     @uvi = data[:current][:uvi]
